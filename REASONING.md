@@ -23,6 +23,8 @@ The case is read as (quote(+ 1 2)) so it has a special operator. Quote returns t
 
 The case ('nil) has an atomic form with no operator head so it evaluates directly as nil, making its course kind automatically as null and its length as none.
 
+I predicted the length as none but the expected case is a 0. I misread the sequence length rule of nil, which is a sequence and has a 0 length.
+
 ## P04
 
 The case ('t) is an atomic symbol with no operator head. Evaluating it returns t as a symbol, and automatically has no length.
@@ -31,9 +33,13 @@ The case ('t) is an atomic symbol with no operator head. Evaluating it returns t
 
 The case (symbolp nil) starts with a function symbolp. Evaluating this returns nil with an assigned symbol and no length.
 
+I predicted the value nil and but the expected case for the value is t. I misread the evaluation for symbolp which I though returns nil. symbol nil in actuality evaluates to t.
+
 ## P06
 
 The case (car '()) starts with a function car. It extracts the first element of the empty list which leads to nil. Results takes null for its kind and has no length.
+
+I predicted the length as none but the expected case is a 0. I misread nil as taking no length since it is atomic, but nil represents an empty list so it takes 0 for its length.
 
 ## P07
 
@@ -50,6 +56,8 @@ The and in this case is a special operator. The evaluation short-circuits then r
 ## P10
 
 The progn in this case is a special operator. The variable defvar declares _ps3-rate_ as a special variable and makes dynamic let binding 10 visible to ps3-scale, so it evaluates 3 \* 10 to 30. The result is an integer and has a scalar length of 1.
+
+I predicted the length as 1 and the expected case evaluates the length to none. I assigned scalar length of 1 to an integer whereas numbers are not sequences and take none for length.
 
 ## P11
 
@@ -70,6 +78,8 @@ The case starts with the function mapcar. It maps the anonymous squaring lambda 
 ## P15
 
 The case starts with the macro lambda. The lambda is uncalled so it returns a function object #. It has a function kind and has no length.
+
+I predicted the value # but the expected case should be #<function>. I misread the required formatting convention and truncated the function object notation.
 
 ## P16
 
