@@ -12,49 +12,75 @@ wrongly. Say what you predicted, what CLISP printed, and which rule you
 misread. Those entries belong in the correction commits.
 
 ## P01
-Replace this line with the rule behind this case's four fields.
+
+The head for this case is function +. Evaluation starts with (\* 2 3) which leads to 6 and then it adds 1 so it becomes 7. The results is an integer that is an atom and the length is none.
 
 ## P02
-Replace this line with the rule behind this case's four fields.
+
+The case is read as (quote(+ 1 2)) so it has a special operator. Quote returns the argument without evaluation so it leads to (+,1,2). It is a cons with length of 3 based on the results.
 
 ## P03
-Replace this line with the rule behind this case's four fields.
+
+The case ('nil) has an atomic form with no operator head so it evaluates directly as nil, making its course kind automatically as null and its length as none.
+
+I predicted the length as none but the expected case is a 0. I misread the sequence length rule of nil, which is a sequence and has a 0 length.
 
 ## P04
-Replace this line with the rule behind this case's four fields.
+
+The case ('t) is an atomic symbol with no operator head. Evaluating it returns t as a symbol, and automatically has no length.
 
 ## P05
-Replace this line with the rule behind this case's four fields.
+
+The case (symbolp nil) starts with a function symbolp. Evaluating this returns nil with an assigned symbol and no length.
+
+I predicted the value nil and but the expected case for the value is t. I misread the evaluation for symbolp which I though returns nil. symbol nil in actuality evaluates to t.
 
 ## P06
-Replace this line with the rule behind this case's four fields.
+
+The case (car '()) starts with a function car. It extracts the first element of the empty list which leads to nil. Results takes null for its kind and has no length.
+
+I predicted the length as none but the expected case is a 0. I misread nil as taking no length since it is atomic, but nil represents an empty list so it takes 0 for its length.
 
 ## P07
-Replace this line with the rule behind this case's four fields.
+
+The case (cons 1 '(2 3)) starts with function cons. It prepends 1 to 2 and 3 to form a list (1,2,3). The kind becomes cons because it is a cell list with 3 top-level elements.
 
 ## P08
-Replace this line with the rule behind this case's four fields.
+
+The case starts with special operator if. The condition (null '()) becomes true, which leads to the true branch evaluated as 'empty. Empty has a symbol kind and none for its length.
 
 ## P09
-Replace this line with the rule behind this case's four fields.
+
+The and in this case is a special operator. The evaluation short-circuits then returns nil. It has a null kind and a length of 0.
 
 ## P10
-Replace this line with the rule behind this case's four fields.
+
+The progn in this case is a special operator. The variable defvar declares _ps3-rate_ as a special variable and makes dynamic let binding 10 visible to ps3-scale, so it evaluates 3 \* 10 to 30. The result is an integer and has a scalar length of 1.
+
+I predicted the length as 1 and the expected case evaluates the length to none. I assigned scalar length of 1 to an integer whereas numbers are not sequences and take none for length.
 
 ## P11
-Replace this line with the rule behind this case's four fields.
+
+The case starts with defun which is a macro. Defining a named function returns ps3-twice which is a symbol. It has no length.
 
 ## P12
-Replace this line with the rule behind this case's four fields.
+
+The labels in this case is a special operator. It has local recursive bindings, so it creates a list (3,2,1) as down decrements. The list has cons as its kind and has a length of 3 due to its top-level elements.
 
 ## P13
-Replace this line with the rule behind this case's four fields.
+
+The case starts with the function mapcar. It applies length to each sublist, which ends in (2,0,1). The result is a cons list and has a length of 3 due to its top-level elements.
 
 ## P14
-Replace this line with the rule behind this case's four fields.
+
+The case starts with the function mapcar. It maps the anonymous squaring lambda across (1,2,3), resulting in (1,4,9). This is a cons list with length 3.
 
 ## P15
-Replace this line with the rule behind this case's four fields.
+
+The case starts with the macro lambda. The lambda is uncalled so it returns a function object #. It has a function kind and has no length.
+
+I predicted the value # but the expected case should be #<function>. I misread the required formatting convention and truncated the function object notation.
 
 ## P16
-Replace this line with the rule behind this case's four fields.
+
+The case starts with special operator let. f in this case is a lambda closure and captures lexical binding factor = 2 when defined. Calling (funcall f 3) evaluates 3 \* 2 to 6 regardless of binding so result becomes an integer and has no length.
