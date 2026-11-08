@@ -21,30 +21,53 @@
 
 ;;; E1 -- numbers and symbols.
 
-(defun lookup (name env)
-  "The value NAME is bound to in ENV.
+; (defun lookup (name env)
+;   "The value NAME is bound to in ENV.
 
-The first match wins, so an inner binding shadows an outer one that shares its
-name. Signal an error when NAME is not bound at all."
-  (declare (ignore name env))
-  (error "lookup is not implemented"))
+; The first match wins, so an inner binding shadows an outer one that shares its
+; name. Signal an error when NAME is not bound at all."
+;   (declare (ignore name env))
+;   (error "lookup is not implemented"))
+
+;;
+(defun lookup (name env)
+  "..."
+  (let ((pair (assoc name env))) ; test the pair for NIL, not the cdr, because the cdr could be NIL and that is a valid
+    (if pair
+        (cdr pair)  ;pair is a cons cell, so cdr is the value
+        (error "unbound variable: ~s" name))))  ;not found, signal an error
+
 
 ;;; E2 -- prefix arithmetic.
 
+; (defun eval-operands (exprs env)
+;   "Every expression in EXPRS, evaluated in the same ENV, as a list.
+
+; MAPCAR and a LAMBDA do this in one line. Watch the arity: EVAL-EXPR takes two
+; arguments and MAPCAR hands its function one."
+;   (declare (ignore exprs env))
+;   (error "eval-operands is not implemented"))
 (defun eval-operands (exprs env)
-  "Every expression in EXPRS, evaluated in the same ENV, as a list.
+  "..."
+  (mapcar (lambda (e) (eval-expr e env)) exprs)) ;mapcar applies the lambda to each element of exprs, evaluating each in env
 
-MAPCAR and a LAMBDA do this in one line. Watch the arity: EVAL-EXPR takes two
-arguments and MAPCAR hands its function one."
-  (declare (ignore exprs env))
-  (error "eval-operands is not implemented"))
 
+
+; (defun apply-op (op values)
+;   "Apply the arithmetic operator OP to the two numbers in VALUES.
+
+; OP is the symbol +, -, or *. Signal an error for anything else."
+;   (declare (ignore op values))
+;   (error "apply-op is not implemented"))
 (defun apply-op (op values)
-  "Apply the arithmetic operator OP to the two numbers in VALUES.
+  "..."
+  (destructuring-bind (a b) values ;case compares the operator and applies the corresponding arithmetic operation to a and b
+    (case op
+      (+ (+ a b))
+      (- (- a b))
+      (* (* a b))
+      (t (error "unknown operator: ~s" op)))))  ;fallback, unknown operator, signal an error
 
-OP is the symbol +, -, or *. Signal an error for anything else."
-  (declare (ignore op values))
-  (error "apply-op is not implemented"))
 
 ;;; E3 -- let.
 
