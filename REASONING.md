@@ -50,37 +50,25 @@ The case (cons 1 '(2 3)) starts with function cons. It prepends 1 to 2 and 3 to 
 The case starts with special operator if. The condition (null '()) becomes true, which leads to the true branch evaluated as 'empty. Empty has a symbol kind and none for its length.
 
 ## P09
-
-The and in this case is a special operator. The evaluation short-circuits then returns nil. It has a null kind and a length of 0.
+`and` is the head, which is a special operator. It evaluates `1`, which is true, then `nil`, which is false, so it stops there and never evaluates 3. It returns `nil`. As in P03, nil is read as `null`, with length `0`.
 
 ## P10
-
-The progn in this case is a special operator. The variable defvar declares _ps3-rate_ as a special variable and makes dynamic let binding 10 visible to ps3-scale, so it evaluates 3 \* 10 to 30. The result is an integer and has a scalar length of 1.
-
-I predicted the length as 1 and the expected case evaluates the length to none. I assigned scalar length of 1 to an integer whereas numbers are not sequences and take none for length.
+`progn` is the head, a `special operator` which evaluates its arguments in order and returns last value. As the first argument, `defvar` declares `*ps3-rate*` special, so the `let` rebinds `*ps3-rate*` to `10`, and `ps3-scale` looks the variable up once it runs, rather than when it was written. It will then see 10 and returns `30`, an integer, which is not a sequence, so the length is `none`.
 
 ## P11
-
-The case starts with defun which is a macro. Defining a named function returns ps3-twice which is a symbol. It has no length.
+`defun` is the head, which is a `macro` making it expand to other code before anything is evaluated. It defines the global function `ps3-twice`, and `defun` form returns the function's name, a `symbol` which is its kind. This means the length is `none`.
 
 ## P12
-
-The labels in this case is a special operator. It has local recursive bindings, so it creates a list (3,2,1) as down decrements. The list has cons as its kind and has a length of 3 due to its top-level elements.
+`labels` is the head, which is a special operator; it creates local function `down` that can call itself, then evaluates the `down 3`. Each call returns `'()` when `n` is 0, and otherwise puts `n` on the front of the list that `(down (- n 1))` returns. This chain builds `(3,2,1)`, a list, so kind is `cons` with length `3`.
 
 ## P13
-
-The case starts with the function mapcar. It applies length to each sublist, which ends in (2,0,1). The result is a cons list and has a length of 3 due to its top-level elements.
+`mapcar` is the head, which is a function. `#'length` evaluates to the function obj for `length`, and the quoted list will be  `((1 2) () (3))`. `mapcar` applies the `length` to each element and collects them into a new list. The result `(2,0,1)` is a list, so the kind is `cons`, with length `3`.
 
 ## P14
-
-The case starts with the function mapcar. It maps the anonymous squaring lambda across (1,2,3), resulting in (1,4,9). This is a cons list with length 3.
+`mapcar` is the head, a function. The `lambda` expression evaluates to a function that squares its argument, which `(1 2 3)` is (`quote` gives the list as is) . `mapcar` applies the function to each element and collects them into list `(1,4,9)`. The kind is `cons`, with length `3`.
 
 ## P15
-
-The case starts with the macro lambda. The lambda is uncalled so it returns a function object #. It has a function kind and has no length.
-
-I predicted the value # but the expected case should be #<function>. I misread the required formatting convention and truncated the function object notation.
+`lambda` is the head, which is a macro, so it rewrites into another form that expands into `(function (lambda (n) (* n 2)))`. Evaluating that returns a function object without calling it, since nothing provides an argument. The value is a function, so the kind is `function`. length is `none`, since it is not a sequence.
 
 ## P16
-
-The case starts with special operator let. f in this case is a lambda closure and captures lexical binding factor = 2 when defined. Calling (funcall f 3) evaluates 3 \* 2 to 6 regardless of binding so result becomes an integer and has no length.
+`let` is the head, a special operator. The `lambda` in `f`  remembers the `factor` that was captured as `2` (Unlike P10, this variable is not special, so even when it is rebound it would change nothing), so the later `factor` of `10` doesn't affect it, and the result is `6`. The returned value is an integer, so the kind is `integer` and the length is `none`.
