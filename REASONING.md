@@ -17,6 +17,7 @@ It heads with the function `+`, so every argument is evaluated in order before i
 ## P02
 `'(+ 1 2)` is read as `(quote (+ 1 2))`, so it heads with `quote`. `quote` is a special operator that evaluates nothing and returns its argument untouched, which is why it is not a function. The result is the list `(quote, (+,1,2))`, which has at least one element, so the kind is `cons` and the length is `2`.
 
+Correction: Described the form instead of its result, but `quote` strips its own layer and returns the list untouched, so it should return as `(+,1,2)` instead of including `quote`. This also changes the length to be `3`.
 
 ## P03
 `nil` is an atom, so it has no head to classify. It is evaluated as itself, and is read as `null`. It has `0` length as it is a sequence, albeit an empty one.
