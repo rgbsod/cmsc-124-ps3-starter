@@ -17,14 +17,19 @@ It heads with the function `+`, so every argument is evaluated in order before i
 ## P02
 `'(+ 1 2)` is read as `(quote (+ 1 2))`, so it heads with `quote`. `quote` is a special operator that evaluates nothing and returns its argument untouched, which is why it is not a function. The result is the list `(quote, (+,1,2))`, which has at least one element, so the kind is `cons` and the length is `2`.
 
+
 ## P03
 `nil` is an atom, so it has no head to classify. It is evaluated as itself, and is read as `null`. It has `0` length as it is a sequence, albeit an empty one.
 
 ## P04
 `t` is an atom, so there is no head to be classified. It is evaluated as `t`, the language's true value, but is read as `symbol`. It read as a symbol and has length of `0`.
 
+Correction: As `t` is read as a symbol, it should have a length of `none` rather than `0`.
+
 ## P05
 `symbolp` is the head, so its argument is evaluated first: `nil` evaluates to itself. `nil` is a symbol, so `symbolp` returns `t`.  Like P04, it read as a symbol and has length of `0`.
+
+Correction: Similar to P04, `t` is read as a symbol, it should have a length of `none` rather than `0`.
 
 ## P06
 `car` is the head, which is a function, so its argument is evaluated first. The argument is the empty list, and `car` of an empty list is `nil`. From P03, it is read as `null`, has `0` length.
