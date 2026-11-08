@@ -1,25 +1,31 @@
 # Reasoning for the Predictions Table
 ## P01
-It heads with the function `+`, so every argument is evaluated in order before it runs. The inner `(* 2 3)` gives 6, and `+` receives 1 and 6 and returns 7. Thus, the result is an integer, not a sequence, so the length is `none` and the head is a function.
+
+The head for this case is function +. Evaluation starts with (\* 2 3) which leads to 6 and then it adds 1 so it becomes 7. The results is an integer that is an atom and the length is none.
 
 ## P02
-`'(+ 1 2)` is read as `(quote (+ 1 2))`, so it heads with `quote`. `quote` is a **special operator** that evaluates nothing and returns its argument untouched, which is why it is not a function. The result is the list `(+,1,2)`, which has at least one element, so the kind is `cons` and the length is `3`.
+
+The case is read as (quote(+ 1 2)) so it has a special operator. Quote returns the argument without evaluation so it leads to (+,1,2). It is a cons with length of 3 based on the results.
 
 ## P03
-`nil` is an atom, so it has no head to classify. It is evaluated as itself, and is read as `null`. It has `0` length as it is a sequence, albeit an empty one.
+
+The case ('nil) has an atomic form with no operator head so it evaluates directly as nil, making its course kind automatically as null and its length as none.
 
 ## P04
-`t` is an atom, so there is no head to be classified. It is evaluated as `t`, the language's true value, but is read as `symbol`. Unlike P03, as it is read as a `symbol`, this means it is not a sequence and thus has length `none`.
+
+The case ('t) is an atomic symbol with no operator head. Evaluating it returns t as a symbol, and automatically has no length.
 
 ## P05
-`symbolp` is the head, so its argument is evaluated first: `nil` evaluates to itself. `nil` is a symbol, so `symbolp` returns `t`. Since it is a symbol other than `nil`, the kind is `symbol`, and it is not a sequence, so the length is `none`.
+
+The case (symbolp nil) starts with a function symbolp. Evaluating this returns nil with an assigned symbol and no length.
 
 ## P06
-`car` is the head, which is a function, so its argument is evaluated first. The argument is the empty list, and `car` of an empty list is `nil`. From P03, it is read as `null`, has `0` length.
+
+The case (car '()) starts with a function car. It extracts the first element of the empty list which leads to nil. Results takes null for its kind and has no length.
 
 ## P07
-`cons` is the head, which is a function. The quote gives it the list `(2 3)` as it is, and `cons` puts `1` on the front, making `(1,2,3)`. That is a list, so the kind is `cons`, and it has three items, so the length is `3`.
 
+The case (cons 1 '(2 3)) starts with function cons. It prepends 1 to 2 and 3 to form a list (1,2,3). The kind becomes cons because it is a cell list with 3 top-level elements.
 
 ## P08
 `if`, as the head, is a special operator. It tests `(null '())`, which is true for empty lists, leading `if` to the first branch, where `quote` will return `empty`. This is a symbol other than `nil`, so the kind is `symbol`, and it is not a sequence, so the length is `none`.
