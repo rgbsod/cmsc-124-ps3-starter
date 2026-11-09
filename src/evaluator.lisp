@@ -112,8 +112,8 @@ CLOSURE is not a closure, and when the argument count does not match."
     (declare (ignore tag))
     (unless (= (length params) (length args))
       (error "arity mismatch: expected ~d arguments, got ~d"
-        (length params) (legnth args)))
-    (eval expr-body (extend-env params args env))))
+        (length params) (length args)))
+    (eval-expr body (extend-env params args env))))
 
 ;;; The dispatcher.
 
