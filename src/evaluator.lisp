@@ -76,16 +76,19 @@
 
 MAPCAR takes two lists and #'CONS pairs them. Build a new list. Do not modify
 ENV, because the caller keeps using it after the extension goes out of scope."
-  (declare (ignore params args env))
-  (error "extend-env is not implemented"))
+  (append (mapcar #'cons params args) env))
 
 (defun eval-let (expr env)
   "Evaluate (let ((name init) ...) body).
 
 Every init is evaluated in ENV before any name is bound, so the bindings happen
 in parallel and an init cannot see a name the same LET introduces."
-  (declare (ignore expr env))
-  (error "eval-let is not implemented"))
+  (destructuring-bind (let-op bindings body) expr
+    (declare (ignore let-op))
+    (let ((params (mapcar #'first bindings))
+        (inits (mapcar #'second bindings)))
+      (let ((args (eval-operands inits env)))
+        (eval-expr body (extend-env params args env))))))
 
 ;;; E4 -- lambda and application.
 
