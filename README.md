@@ -1,8 +1,16 @@
 <!--no-pdf-->
+
 # CMSC 124 Problem Set 3 Starter
 
 This repository holds the CLISP prediction corpus and the toy evaluator for
 Problem Set 3. The assignment manual defines the work and the submission rules.
+
+## Members
+
+| Name                      | GitHub                                     |
+| ------------------------- | ------------------------------------------ |
+| Mikaela Kristen De Guzman | [@rgbsod](https://github.com/rgbsod)       |
+| Angelique Margaret Ardeña | [@elirvrrii](https://github.com/elirvrrii) |
 
 ## Layout
 
@@ -64,12 +72,12 @@ the correct state for a starter. Your fork's run goes green when you finish.
 
 `src/evaluator.lisp` is scored in four groups that stand on their own.
 
-| Group | What works | Functions |
-|---|---|---|
-| E1 | numbers evaluate to themselves, symbols resolve through the environment | `eval-expr`, `lookup` |
-| E2 | `(+ a b)`, `(- a b)`, `(* a b)` over recursively evaluated operands | `eval-operands`, `apply-op` |
-| E3 | `let` extends the environment for its body and nothing else | `extend-env`, `eval-let` |
-| E4 | `lambda` builds a closure, application joins the arguments to it | `make-closure`, `apply-closure` |
+| Group | What works                                                              | Functions                       |
+| ----- | ----------------------------------------------------------------------- | ------------------------------- |
+| E1    | numbers evaluate to themselves, symbols resolve through the environment | `eval-expr`, `lookup`           |
+| E2    | `(+ a b)`, `(- a b)`, `(* a b)` over recursively evaluated operands     | `eval-operands`, `apply-op`     |
+| E3    | `let` extends the environment for its body and nothing else             | `extend-env`, `eval-let`        |
+| E4    | `lambda` builds a closure, application joins the arguments to it        | `make-closure`, `apply-closure` |
 
 A group you never reach costs you that group only. Deleting `make-closure`
 leaves E1, E2, and E3 at full marks and zeroes E4.
@@ -100,27 +108,27 @@ pad a cell to line the columns up in your editor.
 
 The course contract.
 
-| Code | Command | Meaning |
-|---|---|---|
-| 0 | `./check.sh` | all 91 checks passed |
-| 1 | `./check.sh` | at least one check failed |
-| 0 | `./lint` | `predictions.tsv` is well formed and complete |
-| 1 | `./lint` | the table is malformed or still holds a TODO |
-| 0 | `./run <case>` | the case was found and printed |
-| 64 | `./run <case>` | called with the wrong number of arguments |
-| 65 | `./run <case>` | the case id is unknown |
+| Code | Command        | Meaning                                       |
+| ---- | -------------- | --------------------------------------------- |
+| 0    | `./check.sh`   | all 91 checks passed                          |
+| 1    | `./check.sh`   | at least one check failed                     |
+| 0    | `./lint`       | `predictions.tsv` is well formed and complete |
+| 1    | `./lint`       | the table is malformed or still holds a TODO  |
+| 0    | `./run <case>` | the case was found and printed                |
+| 64   | `./run <case>` | called with the wrong number of arguments     |
+| 65   | `./run <case>` | the case id is unknown                        |
 
 ## Tested Toolchains
 
 Every row below is a run that happened.
 
-| Environment | Version reported by `clisp --version` | Result |
-|---|---|---|
-| Windows 11 25H2, Git Bash, the 2.49 win32-mingw zip | `GNU CLISP 2.49 (2010-07-07)` | `1/91` on the starter, `91/91` with the instructor solution |
-| WSL Ubuntu 24.04, `apt-get install clisp` | `GNU CLISP 2.49.93+ (2018-02-18)` | `1/91` on the starter, `91/91` with the instructor solution |
-| GitHub Actions, `ubuntu-latest`, `apt-get install clisp` | `GNU CLISP 2.49.93+ (2018-02-18)` | `1/91` on the starter |
-| GitHub Actions, `macos-latest`, `brew install clisp` | `GNU CLISP 2.49.92 (2018-02-18)`, arm64 | `1/91` on the starter |
-| GitHub Actions, `windows-latest`, the 2.49 win32-mingw zip | `GNU CLISP 2.49 (2010-07-07)` | `1/91` on the starter |
+| Environment                                                | Version reported by `clisp --version`   | Result                                                      |
+| ---------------------------------------------------------- | --------------------------------------- | ----------------------------------------------------------- |
+| Windows 11 25H2, Git Bash, the 2.49 win32-mingw zip        | `GNU CLISP 2.49 (2010-07-07)`           | `1/91` on the starter, `91/91` with the instructor solution |
+| WSL Ubuntu 24.04, `apt-get install clisp`                  | `GNU CLISP 2.49.93+ (2018-02-18)`       | `1/91` on the starter, `91/91` with the instructor solution |
+| GitHub Actions, `ubuntu-latest`, `apt-get install clisp`   | `GNU CLISP 2.49.93+ (2018-02-18)`       | `1/91` on the starter                                       |
+| GitHub Actions, `macos-latest`, `brew install clisp`       | `GNU CLISP 2.49.92 (2018-02-18)`, arm64 | `1/91` on the starter                                       |
+| GitHub Actions, `windows-latest`, the 2.49 win32-mingw zip | `GNU CLISP 2.49 (2010-07-07)`           | `1/91` on the starter                                       |
 
 Three CLISP builds grade this assignment and eight years separate the oldest
 from the newest. They agree. The grader re-derives all 64 published
